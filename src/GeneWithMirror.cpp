@@ -1,11 +1,5 @@
 #include "GeneWithMirror.hpp"
 
-#include "RNG.hpp"
-
-#include <iostream>
-#include <memory>
-#include <vector>
-
 GeneWithMirror::GeneWithMirror() {
   values.push_back(RNG::generate_random_double(constraints[0].first, constraints[0].second));
   values.push_back(RNG::generate_random_double(constraints[1].first, constraints[1].second));

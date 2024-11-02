@@ -1,14 +1,16 @@
 #include "Individual.hpp"
 
-#include "GeneWithMirror.hpp"
-#include "RNG.hpp"
+#include <stdexcept>
 
-#include <ctime>
-#include <iostream>
+Individual::Individual() {
+  fitness = 0;
+  genome = {};
+}
 
 Individual::Individual(std::vector<std::shared_ptr<Gene>> genome) {
   this->genome = genome;
   fitness = RNG::generate_random_double(0, 100);  // temporary, dok ne spojim sa cindrinim kodom: POZIV EVALUACIJE
+  if (fitness == 0) throw std::invalid_argument("invalid game position");
 }
 
 std::vector<std::shared_ptr<Gene>> Individual::getGenome() const { return genome; }
@@ -36,20 +38,10 @@ std::vector<double> Individual::flattenIndividual() {
   return result;
 }
 
-void Individual::printIndividual() {
+void Individual::printIndividual() const {
   for (size_t i = 0; i < genome.size(); ++i) {
     std::cout << "Gene" << i << ": ";
     genome[i]->printGene();
   }
   std::cout << "FITNESS: " << fitness << std::endl;
-}
-
-template <typename GeneType>
-Individual Individual::generateRandomIndividual() {
-  std::vector<std::shared_ptr<Gene>> genome;
-
-  for (int i = 0; i < 9; ++i) {
-    genome.push_back(std::make_shared<GeneType>());
-  }
-  return Individual{genome};
 }

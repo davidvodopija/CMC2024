@@ -2,8 +2,10 @@
 #define GENE_WITH_MIRROR_HPP_
 
 #include "Gene.hpp"
+#include "RNG.hpp"
 
-#include <vector>
+#include <iostream>
+#include <memory>
 
 class GeneWithMirror : public Gene {
  public:
