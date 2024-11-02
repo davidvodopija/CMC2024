@@ -3,25 +3,29 @@
 
 #include "Gene.hpp"
 
+#include <memory>
 #include <vector>
 
 class Individual {
  public:
-  Individual(std::vector<Gene> genome);
+  Individual(std::vector<std::shared_ptr<Gene>> genome);
 
-  std::vector<Gene> getGenome() const;
-  Gene getGene(std::size_t index) const;
+  std::vector<std::shared_ptr<Gene>> getGenome() const;
+  std::shared_ptr<Gene> getGene(std::size_t index) const;
 
   double getFitness() const;
-  double setFintess();
 
   bool operator<(const Individual& other) const;
+
+  std::vector<double> flattenIndividual();
+
+  void printIndividual();
 
   template <typename GeneType>
   static Individual generateRandomIndividual();
 
  private:
-  std::vector<Gene> genome;
+  std::vector<std::shared_ptr<Gene>> genome;
   double fitness;
 };
 
