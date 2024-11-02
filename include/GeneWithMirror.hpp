@@ -3,8 +3,6 @@
 
 #include "Gene.hpp"
 
-#include <math.h>
-
 #include <vector>
 
 class GeneWithMirror : public Gene {
@@ -12,17 +10,17 @@ class GeneWithMirror : public Gene {
   GeneWithMirror();
   GeneWithMirror(std::vector<double> values);
 
-  std::vector<double> getGeneValues() const override = 0;
-  void setGeneValues(std::vector<double> values) = 0;
-  const std::vector<std::pair<double, double>> getConstraints() const = 0;
+  std::vector<double> getGeneValues() const override;
+  void setGeneValues(std::vector<double> values) override;
+  const std::vector<std::pair<double, double>>& getConstraints() const override;
 
-  bool operator<(const Gene& other) const;
+  void printGene() override;
 
-  static void crossover(const Gene& gene1, const Gene& gene2, Gene& result);
+  bool operator<(const Gene& other) const override;
 
  private:
   std::vector<double> values;
-  const std::vector<std::pair<double, double>> constraints;
+  const std::vector<std::pair<double, double>> constraints{{0, 20}, {0, 20}, {0, 3.14159265}};
 };
 
-#endif GENE_WITH_MIRROR_HPP_
+#endif

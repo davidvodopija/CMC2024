@@ -5,11 +5,15 @@
 
 class Gene {
  public:
+  virtual ~Gene() = default;
+
   virtual std::vector<double> getGeneValues() const = 0;
   virtual void setGeneValues(std::vector<double> values) = 0;
-  virtual const std::vector<std::pair<double, double>> getConstraints() const = 0;
+  virtual const std::vector<std::pair<double, double>>& getConstraints() const = 0;
 
   virtual bool operator<(const Gene& other) const = 0;
+
+  virtual void printGene() = 0;
 
   static void crossover(const Gene& gene1, const Gene& gene2, Gene& result);
 };
