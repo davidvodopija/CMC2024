@@ -17,3 +17,9 @@ int RNG::generate_random_binomial(int trials, double probability) {
   std::binomial_distribution<int> dist(trials, probability);
   return dist(gen);
 }
+
+double RNG::generate_random_gaussian(double value, double stddev) {
+  static std::mt19937 gen(std::chrono::system_clock::now().time_since_epoch().count());
+  std::normal_distribution<double> dist(value, stddev);
+  return dist(gen);
+}
