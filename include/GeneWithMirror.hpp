@@ -5,16 +5,15 @@
 #include "RNG.hpp"
 
 #include <iostream>
-#include <memory>
 
 class GeneWithMirror : public Gene {
  public:
   GeneWithMirror();
-  GeneWithMirror(std::vector<double> values);
 
-  std::vector<double> getGeneValues() const override;
+  const std::vector<double>& getGeneValues() const override;
   void setGeneValues(std::vector<double> values) override;
   const std::vector<std::pair<double, double>>& getConstraints() const override;
+  std::vector<std::shared_ptr<Gene>> getFilledClones(const std::vector<double>& genes);
 
   void printGene() override;
 

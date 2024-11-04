@@ -30,10 +30,11 @@ bool Individual::operator<(const Individual& other) const {
       [](const std::shared_ptr<Gene>& a, const std::shared_ptr<Gene>& b) { return *a < *b; });
 }
 
-std::vector<double> Individual::flattenIndividual() {
-  std::vector<double> result;
+std::pair<std::vector<double>, std::vector<std::pair<double, double>>> Individual::flattenIndividual() const {
+  std::pair<std::vector<double>, std::vector<std::pair<double, double>>> result;
   for (auto gene : genome) {
-    result.insert(result.end(), gene->getGeneValues().begin(), gene->getGeneValues().end());
+    result.first.insert(result.first.end(), gene->getGeneValues().begin(), gene->getGeneValues().end());
+    result.second.insert(result.second.end(), gene->getConstraints().begin(), gene->getConstraints().end());
   }
   return result;
 }

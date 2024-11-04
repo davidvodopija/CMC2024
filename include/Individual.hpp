@@ -16,7 +16,7 @@ class Individual {
 
   bool operator<(const Individual& other) const;
 
-  std::vector<double> flattenIndividual();
+  std::pair<std::vector<double>, std::vector<std::pair<double, double>>> flattenIndividual() const;
 
   void printIndividual() const;
 
