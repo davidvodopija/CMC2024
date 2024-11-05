@@ -36,7 +36,7 @@ class Individual {
         individual = tmpIndividual;
       }
       catch (const std::exception& e) {
-        std::cout << "Individual construciton failed, trying again..." << std::endl;
+        // std::cout << "Individual construciton failed, trying again..." << std::endl;
       }
     }
     return individual;

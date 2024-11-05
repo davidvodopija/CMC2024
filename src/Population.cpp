@@ -16,6 +16,11 @@ const Individual Population::getBestIndividual() { return *individuals.rbegin();
 
 const std::size_t Population::getSize() const { return size; }
 
+void Population::clear() {
+  individuals.clear();
+  size = 0;
+}
+
 void Population::printPopulation() {
   auto it = individuals.rbegin();
   for (size_t i = 0; i < size; ++i, ++it) {

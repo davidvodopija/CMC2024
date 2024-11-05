@@ -1,17 +1,18 @@
 # Compiler
 CXX = g++
-CXXFLAGS = -std=c++11 -Wall -Iinclude -Iutil
+CXXFLAGS = -std=c++11 -Wall -Iinclude -Iutil -Ifitness
 
 # Folders
 SRC_DIR = src
 INC_DIR = include
 UTIL_DIR = util
+FITNESS_DIR = fitness
 OBJ_DIR = obj
 BIN_DIR = bin
 
 # Source and Object Files
-SRCS = $(wildcard $(SRC_DIR)/*.cpp) $(wildcard $(UTIL_DIR)/*.cpp)
-OBJS = $(patsubst $(SRC_DIR)/%.cpp, $(OBJ_DIR)/%.o, $(patsubst $(UTIL_DIR)/%.cpp, $(OBJ_DIR)/%.o, $(SRCS)))
+SRCS = $(wildcard $(SRC_DIR)/*.cpp) $(wildcard $(UTIL_DIR)/*.cpp) $(wildcard ./*.cpp)
+OBJS = $(patsubst %.cpp, $(OBJ_DIR)/%.o, $(notdir $(SRCS)))
 
 # Target Executable
 TARGET = $(BIN_DIR)/main
@@ -24,13 +25,16 @@ all: $(TARGET)
 
 # Build the executable
 $(TARGET): $(OBJS)
-	$(CXX) $(CXXFLAGS) -o $@ $^
+	$(CXX) $(CXXFLAGS) -o $@ $(OBJS)
 
-# Compile source and util files into object files
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp $(INC_DIR)/%.hpp
+# Generic rule for compiling all .cpp files to .o files
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-$(OBJ_DIR)/%.o: $(UTIL_DIR)/%.cpp $(UTIL_DIR)/%.hpp
+$(OBJ_DIR)/%.o: $(UTIL_DIR)/%.cpp
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+$(OBJ_DIR)/%.o: %.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 # Clean up build files

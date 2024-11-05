@@ -1,5 +1,8 @@
 #include "Individual.hpp"
 
+#include "GeneticAlgorithm.hpp"
+#include "main.hpp"
+
 #include <stdexcept>
 
 Individual::Individual() {
@@ -9,7 +12,7 @@ Individual::Individual() {
 
 Individual::Individual(std::vector<std::shared_ptr<Gene>> genome) {
   this->genome = genome;
-  fitness = RNG::generate_random_double(0, 100);  // temporary, dok ne spojim sa cindrinim kodom: POZIV EVALUACIJE
+  fitness = start_eval(flattenIndividual().first);
   if (fitness == 0) throw std::invalid_argument("invalid game position");
 }
 
@@ -45,4 +48,9 @@ void Individual::printIndividual() const {
     genome[i]->printGene();
   }
   std::cout << "FITNESS: " << fitness << std::endl;
+}
+
+int main(void) {
+  GeneticAlgorithm::runGenerationalGA(100, 1000).printIndividual();
+  return 0;
 }

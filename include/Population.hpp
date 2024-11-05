@@ -12,6 +12,7 @@ class Population {
   void removeIndividual(Individual individual);
   const Individual getBestIndividual();
   const std::size_t getSize() const;
+  void clear();
 
   void printPopulation();
 
@@ -19,9 +20,9 @@ class Population {
   template <typename GeneType>
   static Population initializeIndividuals(size_t size) {
     Population population;
-    while (size > 0) {
+    for (size_t i = 0; i < size; ++i) {
       population.addIndividual(Individual::generateRandomIndividual<GeneType>());
-      --size;
+      std::cout << i + 1 << "/" << size << std::endl;
     }
     return population;
   }

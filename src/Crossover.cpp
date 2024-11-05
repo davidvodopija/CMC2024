@@ -35,7 +35,7 @@ Individual Crossover::blendAlpha(const Individual& ind1, const Individual& ind2,
       newIndividual = tmpInd;
     }
     catch (const std::exception& e) {
-      std::cout << "Individual construciton after mutation failed, trying again..." << std::endl;
+      // std::cout << "Individual construciton after mutation failed, trying again..." << std::endl;
     }
   }
   return newIndividual;
