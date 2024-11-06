@@ -28,3 +28,12 @@ void Population::printPopulation() {
     it->printIndividual();
   }
 }
+
+Population Population::initializeIndividuals(size_t size) {
+  Population population;
+  for (size_t i = 0; i < size; ++i) {
+    population.addIndividual(Individual::generateRandomIndividual(27));
+    std::cout << i + 1 << "/" << size << std::endl;
+  }
+  return population;
+}

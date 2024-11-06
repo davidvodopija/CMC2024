@@ -6,7 +6,7 @@
 
 class Selection {
  public:
-  static Individual tournamentSelection(const Population& population, size_t k, bool best);
+  static int tournamentSelection(const int popSize, size_t k, bool best);
 };
 
 #endif

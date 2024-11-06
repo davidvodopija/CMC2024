@@ -17,15 +17,7 @@ class Population {
   void printPopulation();
 
   // Default constructor should not be used, instead population should be initialized through this function
-  template <typename GeneType>
-  static Population initializeIndividuals(size_t size) {
-    Population population;
-    for (size_t i = 0; i < size; ++i) {
-      population.addIndividual(Individual::generateRandomIndividual<GeneType>());
-      std::cout << i + 1 << "/" << size << std::endl;
-    }
-    return population;
-  }
+  static Population initializeIndividuals(size_t size);
 
  private:
   std::set<Individual> individuals{};

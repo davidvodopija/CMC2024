@@ -1,50 +1,30 @@
 #ifndef INDIVIDUAL_HPP_
 #define INDIVIDUAL_HPP_
 
-#include "Gene.hpp"
-#include "GeneWithMirror.hpp"
+#include <iostream>
+#include <vector>
+
 
 class Individual {
  public:
   Individual();
-  Individual(std::vector<std::shared_ptr<Gene>> genome);
+  Individual(std::vector<float> genome);
 
-  std::vector<std::shared_ptr<Gene>> getGenome() const;
-  std::shared_ptr<Gene> getGene(std::size_t index) const;
+  std::vector<float> getGenome() const;
 
-  double getFitness() const;
+  float getFitness() const;
 
   bool operator<(const Individual& other) const;
 
-  std::pair<std::vector<double>, std::vector<std::pair<double, double>>> flattenIndividual() const;
-
   void printIndividual() const;
 
-  template <typename GeneType>
-  static Individual generateRandomIndividual() {
-    bool success = false;
-    Individual individual;
-    while (!success) {
-      try {
-        std::vector<std::shared_ptr<Gene>> genome;
+  static Individual generateRandomIndividual(std::size_t size);
 
-        for (int i = 0; i < 9; ++i) {
-          genome.push_back(std::make_shared<GeneType>());
-        }
-        Individual tmpIndividual{genome};
-        success = true;
-        individual = tmpIndividual;
-      }
-      catch (const std::exception& e) {
-        // std::cout << "Individual construciton failed, trying again..." << std::endl;
-      }
-    }
-    return individual;
-  }
+  static const std::vector<std::pair<float, float>> constraints;
 
  private:
-  std::vector<std::shared_ptr<Gene>> genome;
-  double fitness;
+  std::vector<float> genome;
+  float fitness;
 };
 
 #endif

@@ -7,5 +7,5 @@
 
 class Mutation {
  public:
-  static void mutate(std::vector<double>& genome, const std::vector<std::pair<double, double>>& constraints);
+  static void mutate(std::vector<float>& genome);
 };

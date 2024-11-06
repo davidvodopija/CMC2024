@@ -337,14 +337,14 @@ float evaluate_fitness(const float solution[]) {
   return score;
 }
 
-double start_eval(const std::vector<double>& values) {
+double start_eval(const std::vector<float>& values) {
   camera_init();
   // temple_init();
   load_temple_vector(TEMPLE_1000);
   temple3D_init();
   // std::cerr << "Temple initialized!\n";
   float sol[27];
-  std::transform(values.begin(), values.end(), sol, [](double val) { return static_cast<float>(val); });
+  std::transform(values.begin(), values.end(), sol, [](float val) { return val; });
   // const double* a = &values[0];
   /*  float sol[27] = {5.0f,  5.0f, 0.26f, 11.5f, 6.5f, 0.9f,  11.9f, 16.5f, 0.95f, 15.2f,  17.6f, 2.45f, 13.8f, 12.0f,
                     0.92f, 1.6f, 6.2f,  2.53f, 2.2f, 14.7f, 0.7f,  8.5f,  14.2f, 2.325f, 8.7f,  3.05f, 2.525f}; */

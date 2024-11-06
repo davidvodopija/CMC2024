@@ -2,21 +2,20 @@
 
 #include "RNG.hpp"
 
-Individual Selection::tournamentSelection(const Population& population, size_t k, bool best) {
+int Selection::tournamentSelection(const int popSize, size_t k, bool best) {
   std::set<int> indices;
 
   while (indices.size() < k) {
-    indices.emplace(RNG::generate_random_int(0, population.getSize() - 1));
+    indices.emplace(RNG::generate_random_int(0, popSize - 1));
   }
 
-  const auto& individuals = population.getIndividuals();
+  // const auto& individuals = population.getIndividuals();
 
   int targetIndex = best ? *indices.rbegin() : *indices.begin();
+  return targetIndex;
 
-  // std::cout << targetIndex << " ";
+  /*   auto it = individuals.begin();
+    std::advance(it, targetIndex);
 
-  auto it = individuals.begin();
-  std::advance(it, targetIndex);
-
-  return *it;
+    return *it; */
 }

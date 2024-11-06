@@ -1,36 +1,35 @@
 #include "Crossover.hpp"
 
-Individual Crossover::blendAlpha(const Individual& ind1, const Individual& ind2, double alpha) {
-  const auto flatInd1 = ind1.flattenIndividual();
-  const auto flatInd2 = ind2.flattenIndividual();
+Individual Crossover::blendAlpha(const Individual& ind1, const Individual& ind2, float alpha) {
   bool success = false;
   Individual newIndividual;
 
+  const std::vector<float>& genome1 = ind1.getGenome();
+  const std::vector<float>& genome2 = ind2.getGenome();
+
   while (!success) {
-    std::vector<double> newGenome;
+    std::vector<float> newGenome;
     try {
-      size_t n = RNG::generate_random_binomial(flatInd1.first.size(), CROSSOVER_CHANCE);
+      size_t n = RNG::generate_random_binomial(genome1.size(), CROSSOVER_CHANCE);
       std::set<int> indices;
       while (indices.size() < n) {
-        indices.insert(RNG::generate_random_int(0, flatInd1.first.size() - 1));
+        indices.insert(RNG::generate_random_int(0, genome1.size() - 1));
       }
-      for (size_t i = 0; i < flatInd1.first.size(); ++i) {
+      for (size_t i = 0; i < genome1.size(); ++i) {
         if (indices.find(i) != indices.end()) {
           newGenome.push_back(
-              Util::clamp(RNG::generate_random_double(std::min(flatInd1.first[i], flatInd2.first[i]) -
-                                                          std::abs(flatInd1.first[i] - flatInd2.first[i]) * alpha,
-                                                      std::max(flatInd1.first[i], flatInd2.first[i]) +
-                                                          std::abs(flatInd1.first[i] - flatInd2.first[i]) * alpha),
-                          flatInd1.second[i].first,
-                          flatInd1.second[i].second));
+              Util::clamp((float)RNG::generate_random_double(
+                              std::min(genome1[i], genome2[i]) - std::abs(genome1[i] - genome2[i]) * alpha,
+                              std::max(genome1[i], genome2[i]) + std::abs(genome1[i] - genome2[i]) * alpha),
+                          Individual::constraints[i % Individual::constraints.size()].first,
+                          Individual::constraints[i % Individual::constraints.size()].second));
         }
         else {
-          newGenome.push_back(flatInd1.first[i]);
+          newGenome.push_back(genome1[i]);
         }
       }
-      Mutation::mutate(newGenome, flatInd1.second);
-      std::vector<std::shared_ptr<Gene>> newGenes = ind1.getGene(0)->getFilledClones(newGenome);
-      Individual tmpInd{newGenes};
+      Mutation::mutate(newGenome);
+      Individual tmpInd{newGenome};
       success = true;
       newIndividual = tmpInd;
     }

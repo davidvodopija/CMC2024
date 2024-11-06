@@ -11,7 +11,7 @@
 
 class Crossover {
  public:
-  static Individual blendAlpha(const Individual& ind1, const Individual& ind2, double alpha);
+  static Individual blendAlpha(const Individual& ind1, const Individual& ind2, float alpha);
 };
 
 #endif

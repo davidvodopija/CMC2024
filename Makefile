@@ -1,6 +1,6 @@
 # Compiler
 CXX = g++
-CXXFLAGS = -std=c++11 -Wall -Iinclude -Iutil -Ifitness
+CXXFLAGS = -std=c++11 -Wall -Iinclude -Iutil -Ifitness -g
 
 # Folders
 SRC_DIR = src
@@ -34,7 +34,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 $(OBJ_DIR)/%.o: $(UTIL_DIR)/%.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-$(OBJ_DIR)/%.o: %.cpp
+$(OBJ_DIR)/%.o: $(FITNESS_DIR)/%.hpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 # Clean up build files
