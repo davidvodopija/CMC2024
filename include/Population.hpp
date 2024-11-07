@@ -7,7 +7,7 @@
 
 class Population {
  public:
-  std::set<Individual> getIndividuals() const;
+  std::multiset<Individual> getIndividuals() const;
   void addIndividual(Individual individual);
   void removeIndividual(Individual individual);
   const Individual getBestIndividual();
@@ -20,7 +20,7 @@ class Population {
   static Population initializeIndividuals(size_t size);
 
  private:
-  std::set<Individual> individuals{};
+  std::multiset<Individual> individuals{};
   std::size_t size{0};
 };
 

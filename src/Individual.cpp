@@ -1,7 +1,7 @@
 #include "Individual.hpp"
 
 #include "GeneticAlgorithm.hpp"
-#include "main.hpp"
+#include "main2.hpp"
 
 #include <stdexcept>
 
@@ -54,7 +54,9 @@ Individual Individual::generateRandomIndividual(size_t size) {
   return individual;
 }
 
-const std::vector<std::pair<float, float>> Individual::constraints{{0, 20}, {0, 20}, {0, pi}};
+// const std::vector<std::pair<float, float>> Individual::constraints{{0, 20}, {0, 20}, {0, pi}}; OVO ZA SA MIRRORIMA
+// FLAG
+const std::vector<std::pair<float, float>> Individual::constraints{{0, 20}, {0, 20}};
 
 int main(void) {
   GeneticAlgorithm::runGenerationalGA(10, 100).printIndividual();

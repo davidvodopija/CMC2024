@@ -2,7 +2,6 @@
 #define SELECTION_HPP_
 
 #include "Population.hpp"
-#
 
 class Selection {
  public:

@@ -1,6 +1,6 @@
 #include "Population.hpp"
 
-std::set<Individual> Population::getIndividuals() const { return individuals; }
+std::multiset<Individual> Population::getIndividuals() const { return individuals; }
 
 void Population::addIndividual(Individual individual) {
   individuals.insert(individual);
@@ -8,7 +8,10 @@ void Population::addIndividual(Individual individual) {
 }
 
 void Population::removeIndividual(Individual individual) {
-  individuals.erase(individual);
+  auto it = individuals.find(individual);  // Finds one occurrence of the individual
+  if (it != individuals.end()) {
+    individuals.erase(it);  // Only erases one instance if duplicates exist
+  }
   --size;
 }
 
@@ -32,7 +35,7 @@ void Population::printPopulation() {
 Population Population::initializeIndividuals(size_t size) {
   Population population;
   for (size_t i = 0; i < size; ++i) {
-    population.addIndividual(Individual::generateRandomIndividual(27));
+    population.addIndividual(Individual::generateRandomIndividual(18));  // FLAG
     std::cout << i + 1 << "/" << size << std::endl;
   }
   return population;
